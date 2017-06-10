@@ -1,0 +1,27 @@
+<#include "/macro.include"/>
+<#assign className = table.className>
+<#assign classNameFirstLower = table.classNameFirstLower>   
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<#macro mapperEl value>${r"#{"}${value}}</#macro>
+<mapper namespace="${basepackage}.repository.repository.I${className}QueryRepository">
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+
+	<select id="get${className}ById" resultType="${basepackage}.repository.viewmodel.${className}ViewModel" parameterType="java.lang.Integer" >
+		SELECT
+		<#list table.columns as column>${column.sqlName} as ${column.columnNameLower}<#if column_has_next>,</#if></#list>
+	    <![CDATA[
+		    FROM ${table.sqlName} 
+	        WHERE 
+				<#list table.compositeIdColumns as column>
+		        ${column.sqlName} = <@mapperEl 'id'/> <#if column_has_next>,</#if>
+		        </#list>    
+	    ]]>
+	</select>
+
+</mapper>
+
