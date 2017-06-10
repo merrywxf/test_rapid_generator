@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.cn.project.dao">
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insertUsers" useGeneratedKeys="true"
+		keyProperty="id" parameterType="com.cn.project.model.Users">
+    <![CDATA[
+        INSERT INTO users (
+        	id ,
+        	email ,
+        	passwd ,
+        	admin ,
+        	name ,
+        	image ,
+        	created_at 
+        ) VALUES (
+        	#{id} ,
+        	#{email} ,
+        	#{passwd} ,
+        	#{admin} ,
+        	#{name} ,
+        	#{image} ,
+        	#{createdAt} 
+        )
+    ]]>
+	</insert>
+
+	<update id="updateUsers" parameterType="com.cn.project.model.Users">
+    <![CDATA[
+        UPDATE users SET
+	        email = #{email} ,
+	        passwd = #{passwd} ,
+	        admin = #{admin} ,
+	        name = #{name} ,
+	        image = #{image} ,
+	        created_at = #{createdAt} 
+        WHERE 
+	        id = #{id} 
+    ]]>
+	</update>
+
+	<delete id="deleteUsers">
+    <![CDATA[
+        DELETE FROM users WHERE
+        id = #{id} 
+    ]]>
+	</delete>
+
+
+</mapper>
+

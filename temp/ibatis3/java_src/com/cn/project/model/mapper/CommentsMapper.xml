@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.cn.project.dao">
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insertComments" useGeneratedKeys="true"
+		keyProperty="id" parameterType="com.cn.project.model.Comments">
+    <![CDATA[
+        INSERT INTO comments (
+        	id ,
+        	blog_id ,
+        	user_id ,
+        	user_name ,
+        	user_image ,
+        	content ,
+        	created_at 
+        ) VALUES (
+        	#{id} ,
+        	#{blogId} ,
+        	#{userId} ,
+        	#{userName} ,
+        	#{userImage} ,
+        	#{content} ,
+        	#{createdAt} 
+        )
+    ]]>
+	</insert>
+
+	<update id="updateComments" parameterType="com.cn.project.model.Comments">
+    <![CDATA[
+        UPDATE comments SET
+	        blog_id = #{blogId} ,
+	        user_id = #{userId} ,
+	        user_name = #{userName} ,
+	        user_image = #{userImage} ,
+	        content = #{content} ,
+	        created_at = #{createdAt} 
+        WHERE 
+	        id = #{id} 
+    ]]>
+	</update>
+
+	<delete id="deleteComments">
+    <![CDATA[
+        DELETE FROM comments WHERE
+        id = #{id} 
+    ]]>
+	</delete>
+
+
+</mapper>
+
