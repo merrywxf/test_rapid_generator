@@ -5,6 +5,7 @@ import cn.org.rapid_framework.generator.GeneratorFacade;
 public class TestCode {
 	public static void main(String[] args) throws Exception {
 		GeneratorFacade g = new GeneratorFacade();
+		 GeneratorProperties.setProperty("subpackage", ".borrow");
 		g.deleteOutRootDir();
 		// 删除生成器的输出目录//
 		// g.generateByTable("table_name","template");
